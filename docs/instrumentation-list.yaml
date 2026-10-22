@@ -2189,6 +2189,25 @@ definitions:
         type: STRING
       - name: url.scheme
         type: STRING
+    http.server.request.duration-b6723875:
+      name: http.server.request.duration
+      description: Duration of HTTP server requests.
+      instrument: histogram
+      data_type: HISTOGRAM
+      unit: s
+      attributes:
+      - name: error.type
+        type: STRING
+      - name: http.request.method
+        type: STRING
+      - name: http.response.status_code
+        type: LONG
+      - name: http.route
+        type: STRING
+      - name: network.protocol.version
+        type: STRING
+      - name: url.scheme
+        type: STRING
     http.server.response.body.size-9ece7062:
       name: http.server.response.body.size
       description: Size of HTTP server response bodies.
@@ -9051,6 +9070,8 @@ libraries:
         type: LONG
       - name: server.address
         type: STRING
+      - name: server.port
+        type: LONG
   - when: otel.instrumentation.elasticsearch.experimental-span-attributes=true
     metric_refs:
     - db.client.operation.duration-55295033
@@ -9091,8 +9112,6 @@ libraries:
         type: LONG
       - name: server.address
         type: STRING
-      - name: server.port
-        type: LONG
 - name: elasticsearch-transport-5.3
   display_name: Elasticsearch Transport Client
   description: |
@@ -12030,7 +12049,6 @@ libraries:
     - kafka.consumer.fetch_throttle_time_max-d243de50
     - kafka.consumer.fetch_total-ba8b0ac1
     - kafka.consumer.heartbeat_rate-c1755689
-    - kafka.consumer.heartbeat_response_time_max-46b109c5
     - kafka.consumer.heartbeat_total-243f09b7
     - kafka.consumer.incoming_byte_rate-20a9a2be
     - kafka.consumer.incoming_byte_total-bae60fc2
@@ -13756,7 +13774,7 @@ libraries:
     metric_refs:
     - http.client.request.duration-a64b5297
     - http.server.active_requests-2c1402e2
-    - http.server.request.duration-1f6f63ed
+    - http.server.request.duration-b6723875
     - http.server.response.body.size-9ece7062
     spans:
     - span_kind: CLIENT
